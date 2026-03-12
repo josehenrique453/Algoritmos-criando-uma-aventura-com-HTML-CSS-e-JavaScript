@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Busca da Cidade Perdida</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Em Busca da Cidade Perdida</h1>
+        <img id="cena-imagem" src="" alt="Cena da aventura">
+        <p id="cena-texto">Carregando a aventura...</p>
+        <div id="opcoes"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

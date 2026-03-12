@@ -1,0 +1,80 @@
+const cenas = {
+    inicio: {
+        texto: "Você é um explorador em busca da lendária Cidade Perdida na Amazônia. Depois de dias de caminhada, você chega a uma bifurcação na mata fechada. À esquerda, um caminho estreito com marcas antigas nas árvores. À direita, um rio caudaloso com barulho de cachoeira. Qual caminho você escolhe?",
+        imagem: "https://images.unsplash.com/photo-1518492104633-130d0cc84637?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Seguir o caminho estreito à esquerda", proxima: "esquerda" },
+            { texto: "Ir pelo rio à direita", proxima: "direita" }
+        ]
+    },
+    esquerda: {
+        texto: "Você segue as marcas antigas e encontra ruínas cobertas de musgo. Há uma entrada para uma caverna escura e uma escada de pedra subindo uma colina. O que faz?",
+        imagem: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Entrar na caverna", proxima: "caverna" },
+            { texto: "Subir a escada", proxima: "escada" }
+        ]
+    },
+    direita: {
+        texto: "Você pula no rio e nada até a cachoeira. Atrás dela, uma passagem secreta! Mas a correnteza está forte. Você consegue atravessar ou é levado embora?",
+        imagem: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Tentar atravessar a cachoeira", proxima: "vitoria" },
+            { texto: "Desistir e voltar", proxima: "gameover" }
+        ]
+    },
+    caverna: {
+        texto: "Na caverna você encontra armadilhas antigas... Uma flecha voa! Você desvia por pouco, mas cai em um buraco profundo. Game Over 😢",
+        imagem: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Tentar novamente", proxima: "inicio", classe: "recomecar" }
+        ]
+    },
+    escada: {
+        texto: "No topo da colina, você vê a Cidade Perdida brilhando ao pôr do sol! Parabéns, você encontrou o tesouro! 🎉🏆",
+        imagem: "https://images.unsplash.com/photo-1581092160560-1c1e428e9d65?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Jogar de novo", proxima: "inicio", classe: "recomecar" }
+        ]
+    },
+    vitoria: {
+        texto: "Você atravessa a cachoeira e entra em uma câmara secreta cheia de ouro e joias! Você venceu a aventura! 🏆✨",
+        imagem: "https://images.unsplash.com/photo-1581092160560-1c1e428e9d65?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Jogar de novo", proxima: "inicio", classe: "recomecar" }
+        ]
+    },
+    gameover: {
+        texto: "A correnteza te leva... Você se afoga no rio. Game Over 😢",
+        imagem: "https://images.unsplash.com/photo-1513553404607-98823be0d02d?auto=format&fit=crop&q=80&w=800",
+        opcoes: [
+            { texto: "Tentar novamente", proxima: "inicio", classe: "recomecar" }
+        ]
+    }
+};
+
+let cenaAtual = "inicio";
+
+function atualizarCena() {
+    const cena = cenas[cenaAtual];
+    
+    document.getElementById("cena-texto").innerText = cena.texto;
+    document.getElementById("cena-imagem").src = cena.imagem;
+    
+    const areaOpcoes = document.getElementById("opcoes");
+    areaOpcoes.innerHTML = ""; // Limpa botões antigos
+    
+    cena.opcoes.forEach(op => {
+        const botao = document.createElement("button");
+        botao.innerText = op.texto;
+        if (op.classe) botao.classList.add(op.classe);
+        botao.addEventListener("click", () => {
+            cenaAtual = op.proxima;
+            atualizarCena();
+        });
+        areaOpcoes.appendChild(botao);
+    });
+}
+
+// Inicia o jogo
+atualizarCena();
